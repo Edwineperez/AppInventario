@@ -11,9 +11,6 @@ El sistema sigue la **arquitectura en capas típica** de aplicaciones empresaria
 
 Presentación (Vista) → Controlador (Servlet) → Lógica (Fachada) → Persistencia (DAO) → Modelo (Entidad)
 
-markdown
-Copiar código
-
 ---
 
 ## 🧱 Capas y responsabilidades
@@ -75,16 +72,13 @@ AppInventario/
 │
 └── README.md
 
-pgsql
-Copiar código
-
 ---
 
 ## 💾 Base de datos — `inventario_db`
 
 ### Script SQL
 
-```sql
+``sql
 CREATE DATABASE inventario_db;
 USE inventario_db;
 
@@ -99,37 +93,31 @@ CREATE TABLE productos (
 );
 
 INSERT INTO productos (codigo, nombre, categoria, precio, stock, activo) VALUES
-('ABC123', 'Mouse Logitech M170', 'Electronicos', 79.99, 10, 1);
-🚀 Pasos para ejecutar el sistema
+('ABC123', 'Mouse Logitech M170', 'Electronicos', 79.99, 10, 1);``
+
+----
+
+### 🚀 Pasos para ejecutar el sistema
 1️⃣ Crear la base de datos
 Ejecuta el script anterior en MySQL Workbench o desde la terminal:
 
-bash
-Copiar código
 mysql -u root -p < inventario_db.sql
 2️⃣ Configurar el Pool JDBC en GlassFish
 Copia mysql-connector-j-8.x.x.jar a la carpeta:
 
-bash
-Copiar código
 glassfish5/glassfish/lib/
 Reinicia GlassFish y luego en la consola de administración:
 
 Ruta:
+
 Resources → JDBC → Connection Pools → New
-
 Configuración:
-
 Nombre: InventarioPool
-
 Resource Type: javax.sql.DataSource
-
 Database Vendor: MySQL
 
 Propiedades:
 
-bash
-Copiar código
 URL = jdbc:mysql://localhost:3306/inventario_db?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
 User = inv_user
 Password = inv_pass
@@ -137,13 +125,13 @@ Driver Classname = com.mysql.cj.jdbc.Driver
 Haz clic en Ping → debe mostrar “Ping Succeeded”.
 
 Luego crea el recurso JNDI:
+
 Resources → JDBC → JDBC Resources → New
-
 JNDI Name: jdbc/inventarioPool
-
 Pool Name: InventarioPool
 
 3️⃣ Configurar el proyecto en NetBeans
+
 Crea un nuevo proyecto Web Java EE con GlassFish.
 
 Asegúrate de usar Java EE 8.
@@ -171,20 +159,15 @@ Intenta insertar un código duplicado → debe mostrar un error.
 
 Revisa los datos directamente en MySQL:
 
-sql
-Copiar código
 SELECT * FROM productos;
+
 🧠 Reglas de negocio implementadas
+
 Código ≥ 3 caracteres y único
-
 Nombre ≥ 5 caracteres
-
 Categoría ∈ {Electronicos, Accesorios, Muebles, Ropa}
-
 Precio > 0
-
 Stock ≥ 0
-
 Activo = true/false
 
 💡 Decisiones técnicas y diseño
@@ -201,8 +184,7 @@ Vista moderna y responsiva en JSP con CSS puro
 Sistema preparado para extenderse a módulos de proveedores, usuarios y ventas
 
 🧱 Modelo Entidad–Relación (ER)
-diff
-Copiar código
+
 +-------------------+
 |     PRODUCTOS     |
 +-------------------+
@@ -221,8 +203,7 @@ Cumple 3FN (Tercera Forma Normal).
 Base sólida para futuras entidades relacionadas (proveedores, ventas, usuarios).
 
 📈 Diagrama UML (flujo de arquitectura)
-nginx
-Copiar código
+
 Producto
    │
    │ usa
