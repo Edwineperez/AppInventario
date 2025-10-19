@@ -53,24 +53,10 @@ Presentación (Vista) → Controlador (Servlet) → Lógica (Fachada) → Persis
 
 ---
 
-## 🧩 Estructura del proyecto
+## 💾 Base de datos — `inventario_db`
 
-AppInventario/
-│
-├── src/java/
-│ ├── com/inventario/model/Producto.java
-│ ├── com/inventario/persistence/ProductoDAO.java
-│ ├── com/inventario/facade/ProductoFacade.java
-│ └── com/inventario/controller/ProductoServlet.java
-│
-├── web/
-│ └── productos.jsp
-│
-├── WEB-INF/
-│ ├── glassfish-web.xml
-│ └── web.xml
-│
-└── README.md
+### Script SQL
+
 
 ---
 
@@ -93,7 +79,7 @@ CREATE TABLE productos (
 );
 
 INSERT INTO productos (codigo, nombre, categoria, precio, stock, activo) VALUES
-('ABC123', 'Mouse Logitech M170', 'Electronicos', 79.99, 10, 1);``
+('ABC123', 'Mouse Logitech M170', 'Electronicos', 79.99, 10, 1);`
 
 ----
 
