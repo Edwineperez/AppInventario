@@ -57,13 +57,6 @@ Presentación (Vista) → Controlador (Servlet) → Lógica (Fachada) → Persis
 
 ### Script SQL
 
-
----
-
-## 💾 Base de datos — `inventario_db`
-
-### Script SQL
-
 ```sql
 CREATE DATABASE inventario_db;
 USE inventario_db;
@@ -85,125 +78,77 @@ INSERT INTO productos (codigo, nombre, categoria, precio, stock, activo) VALUES
 ```
 ### 🚀 Pasos para ejecutar el sistema
 1️⃣ Crear la base de datos
-Ejecuta el script anterior en MySQL Workbench o desde la terminal:
 
-mysql -u root -p < inventario_db.sql
+- Ejecuta el script anterior en MySQL Workbench o desde la terminal:
+- mysql -u root -p < inventario_db.sql
+
 2️⃣ Configurar el Pool JDBC en GlassFish
-Copia mysql-connector-j-8.x.x.jar a la carpeta:
-
-glassfish5/glassfish/lib/
-Reinicia GlassFish y luego en la consola de administración:
+- Copia mysql-connector-j-8.x.x.jar a la carpeta:
+- glassfish5/glassfish/lib/
+- Reinicia GlassFish y luego en la consola de administración:
 
 Ruta:
 
-Resources → JDBC → Connection Pools → New
-Configuración:
-Nombre: InventarioPool
-Resource Type: javax.sql.DataSource
-Database Vendor: MySQL
+- Resources → JDBC → Connection Pools → New
+- Configuración:
+- Nombre: InventarioPool
+- Resource Type: javax.sql.DataSource
+- Database Vendor: MySQL
 
 Propiedades:
 
-URL = jdbc:mysql://localhost:3306/inventario_db?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
-User = inv_user
-Password = inv_pass
-Driver Classname = com.mysql.cj.jdbc.Driver
-Haz clic en Ping → debe mostrar “Ping Succeeded”.
+- URL = jdbc:mysql://localhost:3306/inventario_db?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
+- User = inv_user
+- Password = inv_pass
+- Driver Classname = com.mysql.cj.jdbc.Driver
+- Haz clic en Ping → debe mostrar “Ping Succeeded”.
 
 Luego crea el recurso JNDI:
 
-Resources → JDBC → JDBC Resources → New
-JNDI Name: jdbc/inventarioPool
-Pool Name: InventarioPool
+- Resources → JDBC → JDBC Resources → New
+- JNDI Name: jdbc/inventarioPool
+- Pool Name: InventarioPool
 
 3️⃣ Configurar el proyecto en NetBeans
 
-Crea un nuevo proyecto Web Java EE con GlassFish.
-
-Asegúrate de usar Java EE 8.
-
-Agrega los paquetes y clases del sistema.
-
-Coloca productos.jsp en /web/.
+- Crea un nuevo proyecto Web Java EE con GlassFish.
+- Asegúrate de usar Java EE 8.
+- Agrega los paquetes y clases del sistema.
+- Coloca productos.jsp en /web/.
 
 4️⃣ Desplegar el proyecto
-En NetBeans:
-Clic derecho en el proyecto → Run o Deploy.
 
-Verifica que aparezca el mensaje:
-Application deployed successfully.
+En NetBeans:
+- Clic derecho en el proyecto → Run o Deploy.
+- Verifica que aparezca el mensaje:
+- Application deployed successfully.
 
 Abre en el navegador:
 👉 http://localhost:8080/InventarioWeb/productos
 
 5️⃣ Probar el CRUD
-Agrega un nuevo producto con el formulario.
 
-Verifica que aparezca en la tabla.
-
-Intenta insertar un código duplicado → debe mostrar un error.
+- Agrega un nuevo producto con el formulario.
+- Verifica que aparezca en la tabla.
+- Intenta insertar un código duplicado → debe mostrar un error.
 
 Revisa los datos directamente en MySQL:
-
-SELECT * FROM productos;
+- SELECT * FROM productos;
 
 🧠 Reglas de negocio implementadas
 
-Código ≥ 3 caracteres y único
-Nombre ≥ 5 caracteres
-Categoría ∈ {Electronicos, Accesorios, Muebles, Ropa}
-Precio > 0
-Stock ≥ 0
-Activo = true/false
+- Código ≥ 3 caracteres y único
+- Nombre ≥ 5 caracteres
+- Categoría ∈ {Electronicos, Accesorios, Muebles, Ropa}
+- Precio > 0
+- Stock ≥ 0
+- Activo = true/false
 
 💡 Decisiones técnicas y diseño
-Patrón DAO + Fachada para separación de responsabilidades
 
-Uso de PreparedStatement para prevenir inyección SQL
-
-Patrón PRG (Post/Redirect/Get) para evitar reenvíos duplicados
-
-Validaciones HTML5 y de negocio en el servidor
-
-Vista moderna y responsiva en JSP con CSS puro
-
-Sistema preparado para extenderse a módulos de proveedores, usuarios y ventas
-
-🧱 Modelo Entidad–Relación (ER)
-
-+-------------------+
-|     PRODUCTOS     |
-+-------------------+
-| id         (PK)   |
-| codigo     (UQ)   |
-| nombre            |
-| categoria         |
-| precio            |
-| stock             |
-| activo            |
-+-------------------+
-📌 PK: Clave primaria
-📌 UQ: Clave única
-
-Cumple 3FN (Tercera Forma Normal).
-Base sólida para futuras entidades relacionadas (proveedores, ventas, usuarios).
-
-📈 Diagrama UML (flujo de arquitectura)
-
-Producto
-   │
-   │ usa
-   ↓
-ProductoDAO
-   │
-   │ llamado por
-   ↓
-ProductoFacade
-   │
-   │ invocado desde
-   ↓
-ProductoServlet
-   │
-   │ muestra datos en
-   ↓
-productos.jsp
+- Patrón DAO + Fachada para separación de responsabilidades
+- Uso de PreparedStatement para prevenir inyección SQL
+- Patrón PRG (Post/Redirect/Get) para evitar reenvíos duplicados
+- Validaciones HTML5 y de negocio en el servidor
+- Vista moderna y responsiva en JSP con CSS puro
+- Sistema preparado para extenderse a módulos de proveedores, usuarios y ventas
