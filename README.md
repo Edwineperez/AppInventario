@@ -64,7 +64,7 @@ Presentación (Vista) → Controlador (Servlet) → Lógica (Fachada) → Persis
 
 ### Script SQL
 
-``sql
+```sql
 CREATE DATABASE inventario_db;
 USE inventario_db;
 
@@ -79,10 +79,10 @@ CREATE TABLE productos (
 );
 
 INSERT INTO productos (codigo, nombre, categoria, precio, stock, activo) VALUES
-('ABC123', 'Mouse Logitech M170', 'Electronicos', 79.99, 10, 1);`
+('ABC123', 'Mouse Logitech M170', 'Electronicos', 79.99, 10, 1);
 
-----
 
+```
 ### 🚀 Pasos para ejecutar el sistema
 1️⃣ Crear la base de datos
 Ejecuta el script anterior en MySQL Workbench o desde la terminal:
