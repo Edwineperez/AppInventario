@@ -124,7 +124,7 @@ En NetBeans:
 - Application deployed successfully.
 
 Abre en el navegador:
-👉 http://localhost:8080/InventarioWeb/productos
+👉 http://localhost:8080/AppInventario/productos
 
 5️⃣ Probar el CRUD
 
