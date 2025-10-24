@@ -1,19 +1,19 @@
-# 🧩 AppInventario
+# AppInventario
 
-## 🎯 Objetivo general
+## Objetivo general
 Desarrollar un sistema de gestión de productos (**inventario**) con un **CRUD funcional**, aplicando **arquitectura en capas** y **buenas prácticas de desarrollo con Java EE**.  
 El sistema permite listar, registrar y eliminar productos, validando las reglas de negocio definidas en el modelo.
 
 ---
 
-## 🧠 Arquitectura del sistema
+## Arquitectura del sistema
 El sistema sigue la **arquitectura en capas típica** de aplicaciones empresariales Java EE, inspirada en el **patrón MVC**:
 
 Presentación (Vista) → Controlador (Servlet) → Lógica (Fachada) → Persistencia (DAO) → Modelo (Entidad)
 
 ---
 
-## 🧱 Capas y responsabilidades
+## Capas y responsabilidades
 
 | Capa | Paquete | Descripción |
 |------|----------|-------------|
@@ -25,7 +25,7 @@ Presentación (Vista) → Controlador (Servlet) → Lógica (Fachada) → Persis
 
 ---
 
-## 📐 Convenciones de nombres
+## Convenciones de nombres
 
 | Elemento | Convención | Ejemplo |
 |-----------|-------------|----------|
@@ -41,7 +41,7 @@ Presentación (Vista) → Controlador (Servlet) → Lógica (Fachada) → Persis
 
 ---
 
-## ⚙️ Requisitos previos
+## Requisitos previos
 
 | Herramienta | Versión recomendada |
 |--------------|--------------------|
@@ -53,7 +53,7 @@ Presentación (Vista) → Controlador (Servlet) → Lógica (Fachada) → Persis
 
 ---
 
-## 💾 Base de datos — `inventario_db`
+## Base de datos — `inventario_db`
 
 ### Script SQL
 
@@ -76,13 +76,13 @@ INSERT INTO productos (codigo, nombre, categoria, precio, stock, activo) VALUES
 
 
 ```
-### 🚀 Pasos para ejecutar el sistema
-1️⃣ Crear la base de datos
+### Pasos para ejecutar el sistema
+1️. Crear la base de datos
 
 - Ejecuta el script anterior en MySQL Workbench o desde la terminal:
 - mysql -u root -p < inventario_db.sql
 
-2️⃣ Configurar el Pool JDBC en GlassFish
+2️. Configurar el Pool JDBC en GlassFish
 - Copia mysql-connector-j-8.x.x.jar a la carpeta:
 - glassfish5/glassfish/lib/
 - Reinicia GlassFish y luego en la consola de administración:
@@ -109,14 +109,14 @@ Luego crea el recurso JNDI:
 - JNDI Name: jdbc/inventarioPool
 - Pool Name: InventarioPool
 
-3️⃣ Configurar el proyecto en NetBeans
+3️. Configurar el proyecto en NetBeans
 
 - Crea un nuevo proyecto Web Java EE con GlassFish.
 - Asegúrate de usar Java EE 8.
 - Agrega los paquetes y clases del sistema.
 - Coloca productos.jsp en /web/.
 
-4️⃣ Desplegar el proyecto
+4️. Desplegar el proyecto
 
 En NetBeans:
 - Clic derecho en el proyecto → Run o Deploy.
@@ -124,9 +124,9 @@ En NetBeans:
 - Application deployed successfully.
 
 Abre en el navegador:
-👉 http://localhost:8080/AppInventario/productos
+- http://localhost:8080/AppInventario/productos
 
-5️⃣ Probar el CRUD
+5️. Probar el CRUD
 
 - Agrega un nuevo producto con el formulario.
 - Verifica que aparezca en la tabla.
@@ -135,7 +135,7 @@ Abre en el navegador:
 Revisa los datos directamente en MySQL:
 - SELECT * FROM productos;
 
-🧠 Reglas de negocio implementadas
+## Reglas de negocio implementadas
 
 - Código ≥ 3 caracteres y único
 - Nombre ≥ 5 caracteres
@@ -144,7 +144,7 @@ Revisa los datos directamente en MySQL:
 - Stock ≥ 0
 - Activo = true/false
 
-💡 Decisiones técnicas y diseño
+## Decisiones técnicas y diseño
 
 - Patrón DAO + Fachada para separación de responsabilidades
 - Uso de PreparedStatement para prevenir inyección SQL
